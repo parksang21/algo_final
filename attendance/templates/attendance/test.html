@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+attendance
+{% endblock title %}
+
+{% block style %}
+body{
+    background-color:#cccccc;
+}
+.sh{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+{% endblock style %}
+
+
+{% block body %}
+<div class="container-fluid text-center" style="color:white;background-color:#60ccff; height:400px;">
+    <div class="container" style="padding-top:12%;padding-bottom:auto;"><h1>Hello wellcom to<br><strong>{{class_info}}</strong></h1></div>
+</div>
+<div class="container text-center sh" style="width:40%;background-color:white; border-radius:5px;margin-top:-10%;" >
+    <img style="width:100%;" src="{% static 'image/Oakyoungrism.png' %}" alt="교수님 사랑합니다.">
+</div>
+<div class="container text-center" style="width:60%; padding-top:20%; padding-bottom:5%;margin-top:-15%;">
+    <h1>Attendance Page</h1>
+    <br>
+    <form class="form-inline"  action="/attend/success/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id="st_id" class="form-control" style="width:80%;" name="student_id" type="text" placeholder="Student ID">
+        <input type="hidden" name="class_pk" value="{{class_info.pk}}">
+        <input type="hidden" id="lon" name="lon" value="">
+        <input type="hidden" id="lat" name="lat" value="">        
+        <input class="btn btn-primary" style="width:20%" type="submit" class="btn" value="submit">
+    </form>
+</div>
+<script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success);
+    }
+    
+    function success(position) {
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("lon").value = position.coords.longitude;
+    }
+</script>
+{% endblock body %}

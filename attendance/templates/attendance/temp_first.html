@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}
+redirecting
+{% endblock title %}
+{% block body %}
+<form name="EventConfirmRedirection" method="post" action="/attend/check/">
+    {% csrf_token %}
+    <input type="hidden" value="{{class_hash}}" id="class_hash" name="class_hash"></input>
+    <input type="submit" value="Go" >
+</form>
+
+<script type="text/javascript">
+    window.onload = function() {
+       document.forms["EventConfirmRedirection"].submit();
+    }
+</script>
+{% endblock body %}

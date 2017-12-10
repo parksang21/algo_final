@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+class Manage
+{% endblock title %}
+
+{% block style %}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.h:hover{
+    background-color:#cccccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+{% endblock style %}
+
+{% block body %}
+<div class="container-fluid" style="padding:0px;">
+    <div class="container-fluid text-center shad" style="margin-right:0px;margin-left:0px;height:200px;padding-top:100px;background-color:#81D4FA;"><h1>Professor's page</h1></div>
+    <div class="container" style="height:80px;padding-top:20px;color:#006064;">
+        <h1>current user : {{user}}</h1>
+    </div>
+</div>
+<br>
+<div class="container" style="color:#006064;">
+    <h2>List of the Options</h2>
+    <hr>
+</div>
+
+<div class="container" style="margin-top:100px;">
+    <a href="{% url 'class:date_detail' class.id date.id%}">
+        <div class="card h">
+            <div class="card-body">
+                <h4 class="card-title">Attend Time</h4>
+                <p class="card-text">set the attend time</p>
+            </div>
+        </div>
+    </a>
+    <br>
+    <a href="{% url 'class:team' class.id date.id %}">
+            <div class="card h">
+                <div class="card-body">
+                    <h4 class="card-title">Make Team</h4>
+                    <p class="card-text">Make Team with attended student</p>
+                </div>
+            </div>
+        </a>
+    <br>
+</div>
+
+{% for class in class_list %}
+
+{% endfor %}
+{% endblock body %}
+
+<a href="{{class.get_absolute_url}}"><h2>{{class.class_model}}-{{class.division}}</h2></a>
