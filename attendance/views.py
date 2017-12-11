@@ -68,10 +68,19 @@ def success(request):
             new_date = DateModel(register=class_info, today=current_date, start_time=current_time)          
             new_date.save()
 
-        new_student = StudentInstance(status='l', student=student_info, date=new_date, attend_time=current_time)
-        new_student.save()
-        return render(request, 'attendance/success.html', {"student" : student_info})
+        try:
+            student_exist = new_date.studentinstance_set.get(student=student_info)
+        except:
+            new_student = StudentInstance(status='l', student=student_info, date=new_date, attend_time=current_time)
+            new_student.save()
+            template = 'attendance/success.html'
+            context = {"student" : student_info}
+        else:
+            template = 'error.html'
+            context = {'err': 'Already send request'}
     else:
         print('student [%s] has not registered [%s]' %(student_info, class_info))
-        err_message = '해당 과목 수강자가 아닙니다.'
-        return render(request, 'attendance/error.html', {'err' : err_message})
+        template = 'error.html'
+        context = {'err': 'you are not registered student'}
+
+    return render(request, template, context)
