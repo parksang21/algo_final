@@ -41,7 +41,7 @@ class RegisterModel(models.Model):
     class_model = models.ForeignKey(ClassModel, on_delete=models.CASCADE, verbose_name='과목')
 
     # hash 값, 인증을 위해 필요
-    class_hash = models.CharField(max_length=10, verbose_name='hash', blank=True, null=True)
+    class_hash = models.CharField(max_length=30, verbose_name='hash', blank=True, null=True)
 
     # 분반
     division = models.IntegerField(default = 1, blank=False, null=False, verbose_name='분반')
