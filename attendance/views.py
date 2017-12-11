@@ -50,15 +50,14 @@ def success(request):
     if (student_info in class_info.student.all()):
         print('Register Conformed')
         
-        print(request.POST['lat'], request.POST['lon'])
-        input_lon = float(request.POST['lon'])
-        input_lat = float(request.POST['lat'])
-        class_lat, class_lon  = map(lambda x: float(x), class_info.lnglat.split(','))
-        print('사용자의 위도(%lf) 경도(%lf) 값 호출 성공' % (input_lat, input_lon))
-        print('[%s]의 위도(%lf) 경도(%lf) 값 호출 성공' % (class_info, class_lat, class_lon))
+        # input_lon = float(request.POST['lon'])
+        # input_lat = float(request.POST['lat'])
+        # class_lat, class_lon  = map(lambda x: float(x), class_info.lnglat.split(','))
+        # print('사용자의 위도(%lf) 경도(%lf) 값 호출 성공' % (input_lat, input_lon))
+        # print('[%s]의 위도(%lf) 경도(%lf) 값 호출 성공' % (class_info, class_lat, class_lon))
 
-        distance = lonlatCalculator(class_lat, class_lon, input_lat, input_lon)
-        print('사용자와 강의실의 거리 ---------- [%f]' % distance)
+        # distance = lonlatCalculator(class_lat, class_lon, input_lat, input_lon)
+        # print('사용자와 강의실의 거리 ---------- [%f]' % distance)
 
         current_date =  timezone.localtime().strftime('%Y-%m-%d')
         current_time = timezone.localtime().strftime('%H:%M:%S')
