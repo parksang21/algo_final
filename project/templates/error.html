@@ -1,1 +1,25 @@
-<h1>{{err}}</h1>
+{% extends "layout.html" %}
+{% block title %}
+error
+{% endblock title %}
+
+{% block style %}
+body{
+    background-color:#60ccff;
+}
+.sh{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+{% endblock style %}
+
+{% block body %}
+
+<div class="container text-center sh" style="background-color:white; border-radius:5px; padding-bottom: 20px; margin-top:20%;">
+    <div class="align-items-center">
+        <strong><h1 style="font-size:50px;">error</h1></strong>
+        <br><br>
+        <h3>{{err}}</h1>
+    </div>
+</div>
+
+{% endblock body %}
