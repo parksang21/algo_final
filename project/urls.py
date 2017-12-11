@@ -19,11 +19,22 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
+from django.shortcuts import render, redirect, get_object_or_404
+
+def afterLogin(request):
+    return redirect('class:class_list', request.user.id)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^attend/', include('attendance.urls', namespace='attend')),
     url(r'^class/', include('classes.urls', namespace='class')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^login/$', auth_views.login, {'template_name':'login.html'}),
+    url(r'^login/redirect/$', afterLogin),
 ]
+
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

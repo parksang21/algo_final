@@ -16,4 +16,4 @@ class DateModel(models.Model):
     register = models.ForeignKey(RegisterModel, on_delete=models.CASCADE, verbose_name='과목')
 
     def __str__(self):
-        return str(self.register) + ' ' + str(self.today)  
+        return str(self.register) + ' ' + str(self.today)

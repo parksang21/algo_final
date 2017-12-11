@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}
+login
+{% endblock title %}
+
+{% block style %}
+body{
+    
+}
+.sh{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+{% endblock style %}
+
+{% block body %}
+
+<div class="container sh" style="color: white;background-color:#212121;padding-bottom:1em;border-radius:5px; margin-top:10em;">
+    <div class="">
+        {% if user.is_active %}
+        <h2>Welcome, {{user.username}}</h2>
+        <a href="{% url 'logout' %}">log out</a>
+        {% else %}
+        {% if form.errors %}
+        <h3>Invalid ID or Password</h3>
+        {% endif %}
+        <h2 class="sub-title">LOGIN</h2>
+        <form class="sign-in-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{form.username.id_for_label}}">User Name</label>
+                <input class="form-control" id="{{form.username.id_for_label}}" name="{{form.username.html_name}}" type="text">    
+            </div>
+            <div class="form-group">
+                <label for="{{form.password.id_for_label}}">Password</label>
+                <input class="form-control" id="{{form.password.id_for_label}}" name="{{form.password.html_name}}" type="password">
+            </div>
+            <input type="submit" class="save btn btn-success" value="LOGIN">
+            <input type="hidden" name="next" value="">
+        </form>
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock body %}
